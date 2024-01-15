@@ -1,0 +1,53 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'poppins','sans-serif';
+  font-size: 18px;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #0C7F8C;
+}
+
+.header{
+  margin: 2%;
+  display: flex;
+  width: 80%;
+  height: 90px;
+  background-color: #021826;
+  color: #fff;
+  border-radius: 7px;
+  padding: 15px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header .logo{
+  font-weight: bold;
+  font-size: 35px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+i{
+  padding-right: 10px;
+}
+
+.cart{
+  background-color: #D7EDF2;
+  color: #021826;
+  width: 70px;
+  justify-content: space-between;
+  border-radius: 7px;
+  padding: 7px 10px;
+}
+
+.cart p{
+  font-size: 20px;
+  border-bottom: 1px solid #021826;
+}
