@@ -63,7 +63,7 @@ require('./sheep_core/config.php');
           <img src="assets/img/produto3.jpg" alt="" class="produtoMiniatura"/>
         </div>
         <div class="titulo">
-            <p>Curso Block Chains</p>
+            <p>Curso Block Chain</p>
             <h2>R$ 419,00</h2>
             <input type="hidden" name="id_produto" value="" />
             <input type="hidden" name="valor_produto" value="" />
@@ -87,7 +87,50 @@ require('./sheep_core/config.php');
       </div>
       </form>
     </div>
+
+
+
+    <div class="barralateral">
+      <div class="topcarrinho">
+        <p>Meu Carrinho</p>
+      </div>
+
+      <div class="item-carrinho">
+        <div class="linhaImagem">
+         <img src="assets/img/produto3.jpg" alt="" class="img-carrinho" />
+        </div>
+        <p>Curso Block Chain</p>
+        <h2>R$ 419,00</h2>
+        <form action="filtros/excluir.php" method="POST">
+          <input type="hidden" name="id_produto" value=""/>
+          <button type="submit" style="border: none; background:none;"><i style="color: white; cursor:pointer;" class="fa fa-trash-o"></i></button>
+        </form>
+      </div>
+
+      <div class="carrinhovazio">Seu carinho está vazio!</div>
+
+      <div class="rodape">
+        <h3>Total: </h3>
+        <h2 style="color: red;">R$ 419,00</h2>
+      </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
   </div>
+
+  
+
+
 
 
 </body>
