@@ -27,69 +27,33 @@ require('./sheep_core/config.php');
   <div class="container">
 
     <div class="lista-produtos">
-      <form action="filtros/criar.php" method="POST">
-      <div class="corpo-produto">
-        <div class="imgProduto">
-          <img src="assets/img/produto1.jpg" alt="" class="produtoMiniatura"/>
-        </div>
-        <div class="titulo">
-            <p>Curso DevOps</p>
-            <h2>R$ 340,00</h2>
-            <input type="hidden" name="id_produto" value="" />
-            <input type="hidden" name="valor_produto" value="" />
-            <button type="submit" name="addcarinho" class="button">Adicionar ao Carrinho</button>
-        </div>
-      </div>
-      </form>
+      <?php
+      $ler = new Ler();
+      $ler->Leitura('produtos', "ORDER BY data DESC");
+      if ($ler->getResultado()) {
+        foreach ($ler->getResultado() as $produto) {
+          $produto = (object) $produto;
+      ?>
 
-      <form action="filtros/criar.php" method="POST">
-      <div class="corpo-produto">
-        <div class="imgProduto">
-          <img src="assets/img/produto2.jpg" alt="" class="produtoMiniatura"/>
-        </div>
-        <div class="titulo">
-            <p>Curso Back And</p>
-            <h2>R$ 920,00</h2>
-            <input type="hidden" name="id_produto" value="" />
-            <input type="hidden" name="valor_produto" value="" />
-            <button type="submit" name="addcarinho" class="button">Adicionar ao Carrinho</button>
-        </div>
-      </div>
-      </form>
-
-      <form action="filtros/criar.php" method="POST">
-      <div class="corpo-produto">
-        <div class="imgProduto">
-          <img src="assets/img/produto3.jpg" alt="" class="produtoMiniatura"/>
-        </div>
-        <div class="titulo">
-            <p>Curso Block Chain</p>
-            <h2>R$ 419,00</h2>
-            <input type="hidden" name="id_produto" value="" />
-            <input type="hidden" name="valor_produto" value="" />
-            <button type="submit" name="addcarinho" class="button">Adicionar ao Carrinho</button>
-        </div>
-      </div>
-      </form>
-
-      <form action="filtros/criar.php" method="POST">
-      <div class="corpo-produto">
-        <div class="imgProduto">
-          <img src="assets/img/produto1.jpg" alt="" class="produtoMiniatura"/>
-        </div>
-        <div class="titulo">
-            <p>Curso Front End</p>
-            <h2>R$ 523,00</h2>
-            <input type="hidden" name="id_produto" value="" />
-            <input type="hidden" name="valor_produto" value="" />
-            <button type="submit" name="addcarinho" class="button">Adicionar ao Carrinho</button>
-        </div>
-      </div>
-      </form>
+          <form action="filtros/criar.php" method="POST">
+            <div class="corpo-produto">
+              <div class="imgProduto">
+                <img src="<?= HOME ?>/uploads/<?= $produto->capa ?>" alt="" class="produtoMiniatura" />
+              </div>
+              <div class="titulo">
+                <p><?= $produto->nome ?></p>
+                <h2><?= $produto->valor ?></h2>
+                <input type="hidden" name="id_produto" value="" />
+                <input type="hidden" name="valor_produto" value="" />
+                <button type="submit" name="addcarinho" class="button">Adicionar ao Carrinho</button>
+              </div>
+            </div>
+          </form>
+      <?php
+        }
+      }
+      ?>
     </div>
-
-
-
     <div class="barralateral">
       <div class="topcarrinho">
         <p>Meu Carrinho</p>
@@ -97,12 +61,12 @@ require('./sheep_core/config.php');
 
       <div class="item-carrinho">
         <div class="linhaImagem">
-         <img src="assets/img/produto3.jpg" alt="" class="img-carrinho" />
+          <img src="assets/img/produto3.jpg" alt="" class="img-carrinho" />
         </div>
         <p>Curso Block Chain</p>
         <h2>R$ 419,00</h2>
         <form action="filtros/excluir.php" method="POST">
-          <input type="hidden" name="id_produto" value=""/>
+          <input type="hidden" name="id_produto" value="" />
           <button type="submit" style="border: none; background:none;"><i style="color: white; cursor:pointer;" class="fa fa-trash-o"></i></button>
         </form>
       </div>
@@ -128,7 +92,7 @@ require('./sheep_core/config.php');
 
   </div>
 
-  
+
 
 
 

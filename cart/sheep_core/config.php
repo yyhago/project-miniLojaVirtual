@@ -6,7 +6,7 @@ define('SHEEP_URL', 'localhost/miniLojaVirtual/cart');
 define('SHEEP_HOST','localhost');
 define('SHEEP_USER','root');
 define('SHEEP_SENHA','root');
-define('SHEEP_BD','loja');
+define('SHEEP_BD','minilojaVirtual');
 
 define('SITENAME', "Nome do site");
 define('SITEDESC', "Nome do site" );
