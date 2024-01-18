@@ -63,10 +63,10 @@ class Produtos
     {
         $criar = new Criar();
         $criar->Criacao(self::BD, $this->Data);
-        if(!$criar->getResultado()){
-            $this->Resultado = false;
-        }else{
+        if($criar->getResultado()){
             $this->Resultado = true;
+        }else{
+            $this->Resultado = false;
         }
     }
 

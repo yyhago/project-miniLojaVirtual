@@ -16,10 +16,15 @@ require('./sheep_core/config.php');
 
 <body>
 
+  <?php
+  $cart = new Ler();
+  $cart->Leitura('carrinho');
+  ?>
+
   <div class="header">
     <p class="logo"><i class="fa fa-cc-mastercard"></i>Mini loja</p>
     <div class="cart">
-      <p><i class="fa fa-shopping-cart"></i>0</p>
+      <p><i class="fa fa-shopping-cart"></i><?= $cart->getContaLinhas() > 0 ? $cart->getContaLinhas() : 0 ?></p>
     </div>
   </div>
 
@@ -43,9 +48,9 @@ require('./sheep_core/config.php');
               <div class="titulo">
                 <p><?= $produto->nome ?></p>
                 <h2><?= $produto->valor ?></h2>
-                <input type="hidden" name="id_produto" value="" />
-                <input type="hidden" name="valor_produto" value="" />
-                <button type="submit" name="addcarinho" class="button">Adicionar ao Carrinho</button>
+                <input type="hidden" name="id_produto" value="<?= $produto->id ?>" />
+                <input type="hidden" name="valor" value="<?= $produto->valor ?>" />
+                <button type="submit" name="addcarrinho" class="button">Adicionar ao Carrinho</button>
               </div>
             </div>
           </form>
@@ -59,43 +64,60 @@ require('./sheep_core/config.php');
         <p>Meu Carrinho</p>
       </div>
 
-      <div class="item-carrinho">
-        <div class="linhaImagem">
-          <img src="assets/img/produto3.jpg" alt="" class="img-carrinho" />
-        </div>
-        <p>Curso Block Chain</p>
-        <h2>R$ 419,00</h2>
-        <form action="filtros/excluir.php" method="POST">
-          <input type="hidden" name="id_produto" value="" />
-          <button type="submit" style="border: none; background:none;"><i style="color: white; cursor:pointer;" class="fa fa-trash-o"></i></button>
-        </form>
-      </div>
 
-      <div class="carrinhovazio">Seu carinho está vazio!</div>
+      <?php
+      if ($cart->getContaLinhas() > 0) {
+        foreach ($cart->getResultado() as $carts) {
+
+
+          $ler = new Ler();
+          $ler->Leitura('produtos', "WHERE id = :id ORDER BY data DESC", "id={$carts['id_produto']}");
+          if ($ler->getResultado()) {
+            foreach ($ler->getResultado() as $produto) {
+              $produto = (object) $produto;
+      ?>
+
+              <div class="item-carrinho">
+                <div class="linhaImagem">
+                  <img src="<?= HOME ?>/uploads/<?= $produto->capa ?>" alt="<?= $produto->nome ?>" class="img-carrinho" />
+                </div>
+                <p><?= $produto->nome ?></p>
+                <h2><?= $produto->valor ?></h2>
+                <form action="filtros/excluir.php" method="POST">
+                  <input type="hidden" name="id_produto" value="<?= $produto->id ?>" />
+                  <button type="submit" style="border: none; background:none;"><i style="color: white; cursor:pointer;" class="fa fa-trash-o"></i></button>
+                </form>
+              </div>
+
+        <?php
+            }
+          }
+        }
+      } else {
+        ?> <div class="carrinhovazio">Seu carrinho está vazio!</div>
+      <?php
+      }
+      ?>
+
+      <?php
+        $totalCarrinho = new Ler();
+        $totalCarrinho->LeituraCompleta("SELECT SUM(valor) as total FROM carrinho");
+        if($totalCarrinho->getResultado()){
+          $totalCompras = number_format($totalCarrinho->getResultado()[0]['total'], 2, ',',',');
+        }else{
+          $totalCompras = 0;
+        }
+      ?>
 
       <div class="rodape">
         <h3>Total: </h3>
-        <h2 style="color: red;">R$ 419,00</h2>
+        <h2 style="color: red;">R$ <?= $totalCompras ?></h2>
       </div>
 
 
     </div>
 
-
-
-
-
-
-
-
-
-
   </div>
-
-
-
-
-
 
 </body>
 
